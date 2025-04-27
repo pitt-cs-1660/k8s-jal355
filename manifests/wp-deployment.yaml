@@ -29,6 +29,7 @@ data:
   ##
   host: "wordpress-mysql"
   user: "wordpress"
+  database: "wordpress"
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -77,12 +78,7 @@ spec:
         # mount sensitive environment vars from secret ref
         # WORDPRESS_DB_PASSWORD (hint use the user-password key)
         ##
-        - name: MYSQL_ROOT_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: database
-              key: root-password
-        - name: MYSQL_PASSWORD
+        - name: WORDPRESS_DB_PASSWORD
           valueFrom:
             secretKeyRef:
               name: database
